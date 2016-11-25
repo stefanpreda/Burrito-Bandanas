@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class WordBuilder : MonoBehaviour {
 
     List<GameObject> currentWord;
+    string currentWord_string;
 
     public float start_positionX = 0.5f;
     public float start_positionY = 0.4f;
@@ -25,6 +26,7 @@ public class WordBuilder : MonoBehaviour {
         currentWord.Clear();
 
         string new_word = getWord();
+        currentWord_string = new_word;
         float spacing = 0;
 
         foreach (char c in new_word)
@@ -54,5 +56,10 @@ public class WordBuilder : MonoBehaviour {
     string getWord()
     {
         return "Dynamic Current Phrase";
+    }
+
+    public string getCurrentWord()
+    {
+        return currentWord_string;
     }
 }
