@@ -1,0 +1,32 @@
+# =============== #
+# Unity generated #
+# =============== #
+WordRacer/Temp/
+WordRacer/Library/
+WordRacer/test_game_Data/
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+WordRacer/ExportedObj/
+WordRacer/obj/
+WordRacer/*.svd
+WordRacer/*.userprefs
+WordRacer/*.csproj
+WordRacer/*.pidb
+WordRacer/*.suo
+WordRacer/*.sln
+WordRacer/*.user
+WordRacer/*.unityproj
+WordRacer/*.booproj
+
+# ============ #
+# OS generated #
+# ============ #
+WordRacer/.DS_Store
+WordRacer/.DS_Store?
+WordRacer/._*
+WordRacer/.Spotlight-V100
+WordRacer/.Trashes
+WordRacer/ehthumbs.db
+WordRacer/Thumbs.db
