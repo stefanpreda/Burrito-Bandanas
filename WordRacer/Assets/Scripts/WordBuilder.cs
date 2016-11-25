@@ -19,16 +19,16 @@ public class WordBuilder : MonoBehaviour {
         ChangeWord();   
 	}
 
-    void ChangeWord()
+    //TODO: Change text fonts and stuff based on current round
+    public void ChangeWord()
     {
-        foreach (GameObject o in currentWord)
-            Destroy(o);
-        currentWord.Clear();
+        ClearWord();
 
-        string new_word = getWord();
+        int round = GameObject.FindGameObjectWithTag("RoundsController").GetComponent<RoundsController>().getCurrentRound();
+        string new_word = getWord(round);
         currentWord_string = new_word;
+    
         float spacing = 0;
-
         foreach (char c in new_word)
         {
             GameObject obj = new GameObject();
@@ -51,11 +51,20 @@ public class WordBuilder : MonoBehaviour {
             currentWord.Add(obj);
         }
     }
-	
-    //TODO: Get a word from a dictionary or something
-    string getWord()
+
+    public void ClearWord()
     {
-        return "Dynamic Current Phrase";
+        foreach (GameObject o in currentWord)
+            Destroy(o);
+        currentWord.Clear();
+    }
+	
+    //TODO: Get a words from a dictionary or something according to current round
+    string getWord(int round)
+    {
+        string[] word = { "Dynamically generated phrase one", "Dynamically generated phrase 2", "Dynamically generated phrase 3" };
+        round = round % 3;
+        return word[round];
     }
 
     public string getCurrentWord()

@@ -2,15 +2,14 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class TextListener : MonoBehaviour {
+public class TextController : MonoBehaviour {
 
     public void TextChanged(string newText)
     {
         string reference_string = GameObject.FindGameObjectWithTag("WordBuilder").GetComponent<WordBuilder>().getCurrentWord();
         if (newText.Equals(reference_string))
-            clearInputField();
+            triggerNextRound();
     }
-
 
     public void setInputFieldText(string text)
     {
@@ -22,5 +21,10 @@ public class TextListener : MonoBehaviour {
     {
         InputField field = GameObject.FindGameObjectWithTag("Input").GetComponent<InputField>();
         field.text = "";
+    }
+
+    public void triggerNextRound()
+    {
+        GameObject.FindGameObjectWithTag("RoundsController").GetComponent<RoundsController>().increaseRound();
     }
 }
