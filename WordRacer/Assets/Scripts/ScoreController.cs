@@ -42,7 +42,9 @@ public class ScoreController : MonoBehaviour {
     
     public int getScoreForFillRemaining(float fill)
     {
+        int current_round = GameObject.FindGameObjectWithTag("RoundsController").GetComponent<RoundsController>().getCurrentRound();
         int score_bonus = (int)(fill * 10);
-        return score_delta + score_bonus;
+        int round_modifier = (current_round + 1) % 10;
+        return (score_delta + score_bonus) * round_modifier;
     }
 }
