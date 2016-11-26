@@ -38,4 +38,9 @@ public class TimerController : MonoBehaviour {
     {
         start_timer = false;
     }
+
+    public float getRemainingFill()
+    {
+        return TimerBar.fillAmount;
+    }
 }

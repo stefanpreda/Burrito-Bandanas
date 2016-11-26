@@ -3,8 +3,14 @@ using System.Collections;
 
 public class RoundsController : MonoBehaviour {
 
-    public int current_round = 0;
+    public int starting_round = 0;
+    int current_round = 0;
     public float start_seconds = 10.0f;
+
+    public void Start()
+    {
+        current_round = starting_round;
+    }
 
     public int getCurrentRound()
     {
@@ -36,9 +42,13 @@ public class RoundsController : MonoBehaviour {
 
     }
 
-    //TODO: Add score support
     public void winCurrentRound()
     {
+        float remaining_fill = GameObject.FindGameObjectWithTag("TimerController").GetComponent<TimerController>().getRemainingFill();
+        Debug.Log(remaining_fill);
+        int score_gained = GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreController>().getScoreForFillRemaining(remaining_fill);
+        GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreController>().increaseScore(score_gained);
+        GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreController>().updateScore();
         increaseRound();
     }
 
