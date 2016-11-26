@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
 public class ScoreController : MonoBehaviour {
 
@@ -23,10 +24,20 @@ public class ScoreController : MonoBehaviour {
         current_score += amount;
     }
 
-    //TODO: Save player name + score
+    //TODO: Get player name as well
     public void saveScore(string filename)
     {
+        string s = "Player " + current_score;
+        if (!File.Exists(filename))
+        {
+            // Create a file to write to.
+            using (StreamWriter sw = File.CreateText(filename))
+                sw.WriteLine(s);
+            return;
 
+        }
+        using (StreamWriter sw = File.AppendText(filename))
+            sw.WriteLine(s);   
     }
     
     public int getScoreForFillRemaining(float fill)
