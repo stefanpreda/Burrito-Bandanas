@@ -7,6 +7,12 @@ public class TextController : MonoBehaviour {
     public void TextChanged(string newText)
     {
         string reference_string = GameObject.FindGameObjectWithTag("WordBuilder").GetComponent<WordBuilder>().getCurrentWord();
+        if (!reference_string.StartsWith(newText))
+        {
+            GameObject.FindGameObjectWithTag("RoundsController").GetComponent<RoundsController>().applyMistake();
+            string s = GameObject.FindGameObjectWithTag("Input").GetComponent<InputField>().text;
+            GameObject.FindGameObjectWithTag("Input").GetComponent<InputField>().text = s.Substring(0, s.Length - 1);
+        }
         if (newText.Equals(reference_string))
             triggerNextRound();
     }

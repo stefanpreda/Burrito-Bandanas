@@ -6,6 +6,7 @@ public class ScoreController : MonoBehaviour {
 
     public int starting_score = 0;
     public int score_delta = 10;
+    public int score_penalty = 10;
     int current_score = 0;
 
 	// Use this for initialization
@@ -22,6 +23,15 @@ public class ScoreController : MonoBehaviour {
     public void increaseScore(int amount)
     {
         current_score += amount;
+    }
+
+    public void applyPenalty()
+    {
+        int current_round = GameObject.FindGameObjectWithTag("RoundsController").GetComponent<RoundsController>().getCurrentRound();
+        current_score -= (score_penalty * (current_round + 1) / 2);
+        if (current_score < 0)
+            current_score = 0;
+        updateScore();
     }
 
     //TODO: Get player name as well
