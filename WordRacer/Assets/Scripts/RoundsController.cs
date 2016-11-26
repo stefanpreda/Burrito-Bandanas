@@ -44,17 +44,31 @@ public class RoundsController : MonoBehaviour {
 
     public void winCurrentRound()
     {
+        //Get remaining percentage of time
         float remaining_fill = GameObject.FindGameObjectWithTag("TimerController").GetComponent<TimerController>().getRemainingFill();
-        Debug.Log(remaining_fill);
+
+        //Compute and update score
         int score_gained = GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreController>().getScoreForFillRemaining(remaining_fill);
         GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreController>().increaseScore(score_gained);
         GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreController>().updateScore();
+
+        //Initiate next round
         increaseRound();
     }
 
-    //TODO: Add lives
     public void loseCurrentRound()
     {
-        increaseRound();
+        //Stop timer
+        GameObject.FindGameObjectWithTag("TimerController").GetComponent<TimerController>().stopTimer();
+
+        //Adjust health
+        GameObject.FindGameObjectWithTag("HealthController").GetComponent<HealthController>().loseHealth();
+        if (GameObject.FindGameObjectWithTag("HealthController").GetComponent<HealthController>().getCurrentHealth() > 0)
+            increaseRound();
+        else
+        {
+            //TODO: Trigger end scene
+            GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreController>().saveScore("Scores.txt");
+        }
     }
 }
