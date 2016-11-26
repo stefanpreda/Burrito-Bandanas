@@ -34,10 +34,11 @@ public class WordBuilder : MonoBehaviour {
             GameObject obj = new GameObject();
             obj.AddComponent<GUIText>();
             obj.GetComponent<GUIText>().text = c.ToString();
-            obj = Instantiate(obj, new Vector3(start_positionX + spacing, start_positionY, 0), Quaternion.identity, transform) as GameObject;
 
             //Scale to screen size
             obj.GetComponent<GUIText>().fontSize = Screen.width / text_size_divisor;
+
+            obj = Instantiate(obj, new Vector3(start_positionX + spacing, start_positionY, 0), Quaternion.identity, transform) as GameObject;
 
             Rect r = obj.GetComponent<GUIText>().GetScreenRect();
             Vector3 posX = camera.ScreenToViewportPoint(new Vector3(r.x, r.y, 0f));

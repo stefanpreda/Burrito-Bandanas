@@ -25,6 +25,6 @@ public class TextController : MonoBehaviour {
 
     public void triggerNextRound()
     {
-        GameObject.FindGameObjectWithTag("RoundsController").GetComponent<RoundsController>().increaseRound();
+        GameObject.FindGameObjectWithTag("RoundsController").GetComponent<RoundsController>().winCurrentRound();
     }
 }
