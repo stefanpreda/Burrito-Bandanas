@@ -3,7 +3,7 @@ using System.Collections;
 
 public class HealthController : MonoBehaviour {
 
-    public int starting_health = 3;
+    public int starting_health = 5;
     int current_health;
 
 	// Use this for initialization
