@@ -20,5 +20,17 @@ public class ButtonsListener : MonoBehaviour {
     public void ReturnToMenuButtonPressed()
     {
         Debug.Log("Return pressed");
+        SceneManager.LoadScene("StartScene");
+    }
+
+    public void NewGrameButtonPressed()
+    {
+        Debug.Log("New Game pressed");
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public void SettingsButtonPressed()
+    {
+        Debug.Log("Settings pressed");
     }
 }
