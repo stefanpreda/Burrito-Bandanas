@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class RoundsController : MonoBehaviour {
 
@@ -69,22 +70,17 @@ public class RoundsController : MonoBehaviour {
 
     public void applyMistake()
     {
-
-        //FIXME: This is to not allow mistakes to be applied after game ended, needs to be deleted after adding end scene
-        if (GameObject.FindGameObjectWithTag("HealthController").GetComponent<HealthController>().getCurrentHealth() == 0)
-            return;
-
         //Adjust health
         GameObject.FindGameObjectWithTag("HealthController").GetComponent<HealthController>().loseHealth();
         if (GameObject.FindGameObjectWithTag("HealthController").GetComponent<HealthController>().getCurrentHealth() == 0)
         {
-            //TODO: Trigger end scene
-
             //Stop timer
             GameObject.FindGameObjectWithTag("TimerController").GetComponent<TimerController>().stopTimer();
 
             //Save score
             GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreController>().saveScore("Scores.txt");
+
+            SceneManager.LoadScene("EndScene");
         }
     }
 }
