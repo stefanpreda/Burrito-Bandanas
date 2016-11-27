@@ -1,0 +1,732 @@
+acres
+adult
+advice
+arrangement
+attempt
+August
+Autumn
+border
+breeze
+brick
+calm
+canal
+Casey
+cast
+chose
+claws
+coach
+constantly
+contrast
+cookies
+customs
+damage
+Danny
+deeply
+depth
+discussion
+doll
+donkey
+Egypt
+Ellen
+essential
+exchange
+exist
+explanation
+facing
+film
+finest
+fireplace
+floating
+folks
+fort
+garage
+grabbed
+grandmother
+habit
+happily
+Harry
+heading
+hunter
+Illinois
+image
+independent
+instant
+January
+kids
+label
+Lee
+lungs
+manufacturing
+Martin
+mathematics
+melted
+memory
+mill
+mission
+monkey
+Mount
+mysterious
+neighborhood
+Norway
+nuts
+occasionally
+official
+ourselves
+palace
+Pennsylvania
+Philadelphia
+plates
+poetry
+policeman
+positive
+possibly
+practical
+pride
+promised
+recall
+relationship
+remarkable
+require
+rhyme
+rocky
+rubbed
+rush
+sale
+satellites
+satisfied
+scared
+selection
+shake
+shaking
+shallow
+shout
+silly
+simplest
+slight
+slip
+slope
+soap
+solar
+species
+spin
+stiff
+swung
+tales
+thumb
+tobacco
+toy
+trap
+treated
+tune
+University
+vapor
+vessels
+wealth
+wolf
+zoo
+advantage
+advertisement
+advice
+agenda
+apology
+authorization
+bill
+brand
+budget
+commission
+comparison
+competition
+competitor
+confirmation
+costs
+creditor
+customer
+deadline
+debt
+debtor
+decision
+decrease
+deficit
+delivery
+department
+description
+difference
+disadvantage
+distribution
+employee
+employer
+enquiry
+environment
+equipment
+estimate
+experience
+explanation
+facilities
+factory
+feedback
+goal
+goods
+growth
+guarantee
+improvement
+increase
+industry
+instructions
+interest
+inventory
+invoice
+knowledge
+limit
+loss
+margin
+market
+message
+mistake
+objective
+offer
+opinion
+option
+order
+output
+payment
+penalty
+permission
+possibility
+product
+production
+profit
+promotion
+purchase
+reduction
+refund
+reminder
+repairs
+report
+responsibility
+result
+retailer
+rise
+risk
+salary
+sales
+schedule
+share
+signature
+stock
+success
+suggestion
+supply
+support
+target
+transport
+turnover
+wholesaler
+accountant
+actor
+actress
+athlete
+author
+baker
+banker
+barber
+beautician
+broker
+burglar
+butcher
+carpenter
+chauffeur
+chef
+clerk
+coach
+craftsman
+criminal
+crook
+dentist
+doctor
+editor
+engineer
+farmer
+fire fighter
+fisherman
+judge
+lawyer
+magician
+mechanic
+musician
+nurse
+pharmacist
+pilot
+poet
+policeman
+politician
+printer
+professor
+rabbi
+priest
+pastor
+sailor
+salesman
+shoemaker
+soldier
+tailor
+teacher
+veterinarian
+waiter
+waitress
+watchmaker
+address
+age
+apply
+area code
+birthday
+certification
+children
+citizenship
+city
+college
+country
+criminal record
+date
+date of birth
+dependents
+diploma
+divorced
+education
+educational background
+elementary school
+employee
+employer
+experience
+family name
+felony record
+female
+fired
+first name
+gender
+graduate school
+handicap
+hearing
+height
+high school
+husband's name
+junior college
+junior high school
+last name
+male
+marital status
+married
+middle name
+name
+next of kin
+notify
+occupation
+phone number
+physical examination
+position
+present address
+previous experience
+quit
+reason for leaving
+relatives
+salary
+separated
+single
+skills
+social security number
+state
+street
+telephone number
+vision
+weight
+wife's name
+zip code
+accept
+add
+admit
+advertise
+advise
+afford
+approve
+authorize
+avoid
+borrow
+build
+buy
+calculate
+cancel
+change
+charge
+check
+choose
+complain
+complete
+confirm
+consider
+convince
+count
+decide
+decrease
+deliver
+develop
+discount
+dismiss
+dispatch
+distribute
+divide
+employ
+encourage
+establish
+estimate
+exchange
+extend
+fix
+fund
+improve
+increase
+inform
+install
+invest
+invoice
+join
+lend
+lengthen
+lower
+maintain
+manage
+measure
+mention
+obtain
+order
+organize
+owe
+own
+pack
+participate
+pay
+plan
+present
+prevent
+process
+produce
+promise
+promote
+provide
+purchase
+raise
+reach
+receive
+recruit
+reduce
+refuse
+reject
+remind
+remove
+reply
+resign
+respond
+return
+rise
+sell
+send
+separate
+shorten
+split
+structure
+succeed
+suggest
+adjustable wrench
+ball peen hammer
+bench saw
+box end wrench
+brace
+C-clamp
+circular saw
+drill press
+electric drill
+hacksaw
+hammer
+hand drill
+handsaw
+locking pliers
+mallet
+open end wrench
+plane
+pliers
+rib joint pliers
+router
+screwdriver
+vise
+baggage claim check
+boarding pass
+boarding time
+body check
+check in
+customs
+customs declaration
+customs officer
+departure lounge
+departure time
+immigration counter
+passport
+personal effects
+security check
+time difference
+time zones
+visa
+capricorn
+abominable snowman
+android
+dragon
+Martian
+mermaid
+nessie
+ogre
+phoenix
+robot
+snowman
+sphinx
+spirit
+unicorn
+vampire
+werewolf
+breakwater
+buoy
+crane
+dock
+lighthouse
+ship
+shipyard
+tugboat
+wharf
+C-clamp
+chisel
+electric drill
+file
+finishing sander
+hacksaw
+jigsaw
+large level
+large screwdriver
+metal snips
+paint brush
+pipe clamp
+pipe wrench
+plane
+portable power saw
+propane torch
+putty knife
+scraper
+sharpening stone
+side-cutting pliers
+small wrecking bar
+soldering gun
+stapler
+wire brush
+wire stripper
+backstroke
+breaststroke
+butterfly
+crawl
+deep end
+diving
+diving board
+dog paddle
+lake
+life guard
+ocean
+river
+shallow end
+sidestroke
+swimming lane
+swimming pool
+synchronized swimming
+turn
+water
+blizzard
+boots
+candle
+chill
+coat
+cold
+December
+fireplace
+freeze
+frost
+hat
+ice
+Merry Christmas
+mittens
+scarf
+season
+shovel
+skates
+sled
+sleigh bells
+snowflake
+snowman
+snowstorm
+winter
+butane
+carbon dioxide
+carbon monoxide
+freon
+helium
+hydrogen
+methane
+neon
+nitric oxide
+nitrogen
+oxygen
+propane
+baler
+combine harvester
+cultivator
+disk harrow
+fertilizer distributor
+harrow
+manure spreader
+ribbing plow
+rotary hoe
+seed drill
+subsoil plow
+tractor
+air
+barometer
+blizzard
+Celsius
+chill
+cirrus
+cloud
+clouds
+cloudy
+cold
+cyclone
+degree
+dew
+drizzle
+dry
+dry season
+Fahrenheit
+flood
+fog
+forecast
+freeze
+frost
+hail
+heat
+hot
+humidity
+hurricane
+ice
+lightning
+meteorology
+moon
+precipitation
+pressure
+radar
+rain
+rainstorm
+rainbow
+rainy
+rainy season
+sky
+sleet
+snow
+snowstorm
+snowy
+storm
+sun
+sunny
+temperature
+thermometer
+thunder
+thunderstorm
+tornado
+tsunami
+typhoon
+warm
+weather
+wind
+windy
+teaspoonful
+mouthful
+painful
+cupful
+careful
+helpful
+boastful
+handful
+dreadful
+mournful
+beautiful
+harmful
+lawful
+playful
+powerful
+colorful
+shameful
+useful
+doubtful
+graceful
+tearful
+bountiful
+awful
+rightful
+spoonful
+thoughtful
+careless
+colorless
+doubtless
+endles
+endless
+fearless
+helpless
+homeless
+hopeless
+lifeless
+nevertheless
+restless
+senseless
+sightless
+tasteless
+useless
+aluminum ladder
+extension ladder
+foldaway ladder
+barge
+dredger
+dugout
+galley
+gondola
+hovercraft
+icebreaker
+kayak
+motorboat
+outrigger
+rafts
+rowboat
+sampan
+submarine
+tanker
+tugboat
+canoe
+catamaran
+dinghy
+ferry
+ferryboat
+freighter
+hovercraft
+hydrofoil
+kayak
+motorboat
+passenger ship
+raft
+rowboat
+sailboat
+seaplane
+ship
+speedboat
+submarine
+surfboard
+swimming
+yacht

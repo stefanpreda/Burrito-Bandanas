@@ -11,13 +11,27 @@ public class WordBuilder : MonoBehaviour {
     public float start_positionY = 0.4f;
     public float word_spacing = 0.005f;
     public int text_size_divisor = 25;
-
+    private string[] files = { "easy words", "hard words", "master words" };
     public Camera camera = null;
 
-	void Start () {
+    void Start () {
         currentWord = new List<GameObject>();
         ChangeWord();   
-	}
+    }
+
+    private string Load(string fileContent) {
+        string result = "";
+        string[] words = fileContent.Split('\n');
+        int number;
+        for (int i = 0; i < 3; i++) {
+
+            number = UnityEngine.Random.Range(1, 800);
+            result += words[number].Substring(0,words[number].Length - 1) + " ";
+        }
+        number = UnityEngine.Random.Range(1, 800);
+        result += words[number].Substring(0, words[number].Length - 1);
+        return result;
+    }
 
     //TODO: Change text fonts and stuff based on current round
     public void ChangeWord()
@@ -112,11 +126,18 @@ public class WordBuilder : MonoBehaviour {
     }
 	
     //TODO: Get a words from a dictionary or something according to current round
-    string getWord(int round)
-    {
-        string[] word = { "Dynamically generated phrase 1", "Dynamically generated phrase 2", "Dynamically generated phrase 3" };
-        round = round % 3;
-        return word[round];
+   string getWord(int round)
+    { 
+        string wordFile;
+        if (round < 10)
+            wordFile = files[0];
+        else if (round < 20)
+            wordFile = files[1];
+        else
+            wordFile = files[2];
+        TextAsset txt = (TextAsset)Resources.Load(wordFile, typeof(TextAsset));
+        string content = txt.text;
+        return Load(content);
     }
 
     public string getCurrentWord()
