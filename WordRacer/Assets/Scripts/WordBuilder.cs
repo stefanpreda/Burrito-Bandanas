@@ -11,6 +11,8 @@ public class WordBuilder : MonoBehaviour {
     public float start_positionY = 0.4f;
     public float word_spacing = 0.005f;
     public int text_size_divisor = 25;
+    public string sortingLayerName = "Default";
+    public int sortingOrder = 0;
     private string[] files = { "easy words", "hard words", "master words" };
     public Camera camera = null;
 
@@ -54,32 +56,34 @@ public class WordBuilder : MonoBehaviour {
         foreach (char c in new_word)
         {
             GameObject obj = new GameObject();
-            Quaternion rotation = Quaternion.identity;
-            obj.AddComponent<GUIText>();
-            obj.GetComponent<GUIText>().text = c.ToString();
+            obj.AddComponent<TextMesh>();
+            obj.GetComponent<TextMesh>().text = c.ToString();
+            obj.GetComponent<TextMesh>().characterSize = 0.1f;
+
+            //Draw this on top of other components
+            obj.GetComponent<MeshRenderer>().sortingLayerName = sortingLayerName;
+            obj.GetComponent<MeshRenderer>().sortingOrder = sortingOrder;
 
             //Scale to screen size
-            obj.GetComponent<GUIText>().fontSize = Screen.width / text_size_divisor;
+            obj.GetComponent<TextMesh>().fontSize = Screen.width / text_size_divisor;
 
             //Apply color changes
             if (round > 0)
             {     
-                obj.GetComponent<GUIText>().color = new Color(Random.Range(0, 255) / 255.0f, Random.Range(0, 255) / 255.0f, Random.Range(0, 255) / 255.0f, 1.0f);
+                obj.GetComponent<TextMesh>().color = new Color(Random.Range(0, 255) / 255.0f, Random.Range(0, 255) / 255.0f, Random.Range(0, 255) / 255.0f, 1.0f);
             }
 
             //Apply random scales
             if (round > 1)
             {
-                obj.GetComponent<GUIText>().fontSize = Screen.width / Random.Range(text_size_divisor - 10, text_size_divisor + 10);
+                obj.GetComponent<TextMesh>().fontSize = Screen.width / Random.Range(text_size_divisor - 10, text_size_divisor + 10);
             }
 
             //Apply flips
             //FIXME: Rotations don't work...
             if (round == 0)
             {
-                if (selected_indices.Contains(index)) {
-                    obj.GetComponent<GUIText>().transform.Rotate(new Vector3(0, 90, 0));
-                }
+                //obj.transform.Rotate(0.0f, 0.0f, 90.0f);
             }
 
             //Apply rotations with fixed angle
@@ -100,12 +104,13 @@ public class WordBuilder : MonoBehaviour {
                 }
 
             }*/
+            var pos = camera.ViewportToWorldPoint(new Vector3(start_positionX + spacing, start_positionY, 0.0f));
+            pos.z = 0.0f;
+            obj.transform.position = pos;
 
-            obj = Instantiate(obj, new Vector3(start_positionX + spacing, start_positionY, 0), rotation) as GameObject;
-
-            Rect r = obj.GetComponent<GUIText>().GetScreenRect();
-            Vector3 posX = camera.ScreenToViewportPoint(new Vector3(r.x, r.y, 0f));
-            Vector3 max_posX = camera.ScreenToViewportPoint(new Vector3(r.xMax, r.y, 0f));
+            var width = obj.GetComponent<MeshRenderer>().bounds.size.x;
+            Vector3 posX = camera.WorldToViewportPoint(new Vector3(pos.x, pos.y, 0f));
+            Vector3 max_posX = camera.WorldToViewportPoint(new Vector3(pos.x + width, pos.y, 0f));
 
             //Adding character lengths
             spacing += max_posX.x - posX.x;
