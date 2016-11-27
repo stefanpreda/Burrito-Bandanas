@@ -6,11 +6,13 @@ public class RoundsController : MonoBehaviour {
 
     public int starting_round = 0;
     int current_round = 0;
-    public float start_seconds = 10.0f;
+    public float start_seconds = 20.0f;
+    float current_seconds = 20.0f;
 
     public void Start()
     {
         current_round = starting_round;
+        current_seconds = start_seconds;
     }
 
     public int getCurrentRound()
@@ -18,10 +20,13 @@ public class RoundsController : MonoBehaviour {
         return current_round;
     }
 
-    //TODO: Reduce seconds after each round + hard/soft cap
     public float getSecondsForRound(int round)
     {
-        return start_seconds;
+        float time_reduction = 5;
+        if (round != 0)
+            time_reduction = time_reduction / round;
+        current_seconds = current_seconds - time_reduction;
+        return current_seconds;
     }
 
     public void increaseRound()
