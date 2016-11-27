@@ -25,7 +25,7 @@ public class WordBuilder : MonoBehaviour {
         string result = "";
         string[] words = fileContent.Split('\n');
         int number;
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 2; i++) {
 
             number = UnityEngine.Random.Range(1, 800);
             result += words[number].Substring(0,words[number].Length - 1) + " ";
@@ -80,14 +80,18 @@ public class WordBuilder : MonoBehaviour {
             }
 
             //Apply flips
-            //FIXME: Rotations don't work...
-            if (round == 0)
+            //TODO: This works but the text is very hard to read
+            /*if (round == 0)
             {
-                //obj.transform.Rotate(0.0f, 0.0f, 90.0f);
-            }
+                if (selected_indices.Contains(index))
+                {
+                    obj.transform.localScale = new Vector3((-1) * obj.transform.localScale.x, obj.transform.localScale.y, obj.transform.localScale.z);
+                }
+            }*/
 
             //Apply rotations with fixed angle
-            /*if (round == 3)
+            //TODO Not sure if this is correct, looks horrible
+            /*if (round == 0)
             {
                 if (selected_indices.Contains(index))
                 {
@@ -97,16 +101,29 @@ public class WordBuilder : MonoBehaviour {
                         angle = rotation_angle_index * 90;
                     else
                         angle = (rotation_angle_index - 4) * (-90);
-                    Debug.Log("" + rotation_angle_index + " " + angle);
-                    Vector3 newScale = obj.transform.localScale;
-                    newScale.x *= -1;
-                    obj.transform.localScale = newScale;
+                    Quaternion rotation = Quaternion.identity;
+                    rotation.eulerAngles = new Vector3(0, 0, angle);
+                    //obj.transform.Rotate(Vector3.forward * angle);
+                    //obj.transform.rotation = rotation;
+                    obj.transform.RotateAround(obj.transform.position, new Vector3(0, 0, 1), angle);
                 }
 
             }*/
-            var pos = camera.ViewportToWorldPoint(new Vector3(start_positionX + spacing, start_positionY, 0.0f));
+
+            Vector3 pos = camera.ViewportToWorldPoint(new Vector3(start_positionX + spacing, start_positionY, 0.0f));
             pos.z = 0.0f;
             obj.transform.position = pos;
+
+            if (round > 2)
+            {
+                if (selected_indices.Contains(index))
+                {
+                    float deltaY = Random.Range(-0.05f, 0.05f);
+                    var position = camera.ViewportToWorldPoint(new Vector3(start_positionX + spacing, start_positionY + deltaY, 0.0f));
+                    position.z = 0.0f;
+                    obj.transform.position = position;
+                }
+            }
 
             var width = obj.GetComponent<MeshRenderer>().bounds.size.x;
             Vector3 posX = camera.WorldToViewportPoint(new Vector3(pos.x, pos.y, 0f));
@@ -117,6 +134,9 @@ public class WordBuilder : MonoBehaviour {
 
             //Adding extra space between characters
             spacing += word_spacing;
+
+            if (c == ' ')
+                spacing += 0.05f;
             currentWord.Add(obj);
 
             index++;
@@ -130,7 +150,6 @@ public class WordBuilder : MonoBehaviour {
         currentWord.Clear();
     }
 	
-    //TODO: Get a words from a dictionary or something according to current round
    string getWord(int round)
     { 
         string wordFile;

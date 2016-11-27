@@ -22,7 +22,7 @@ public class RoundsController : MonoBehaviour {
 
     public float getSecondsForRound(int round)
     {
-        float time_reduction = 5;
+        float time_reduction = 3;
         if (round != 0)
             time_reduction = time_reduction / round;
         current_seconds = current_seconds - time_reduction;
