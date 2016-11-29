@@ -3,18 +3,34 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class PlayerNameAndScoreFile : MonoBehaviour {
-    static protected string PlayerName;
-    static protected string ScoreFileName;
+    static protected string PlayerName = "Unknown";
+    static protected string ScoreFileName = "Scores";
+
+    void Start()
+    {
+        GameObject.FindGameObjectWithTag("InputName").GetComponent<InputField>().text = PlayerName;
+        GameObject.FindGameObjectWithTag("InputScore").GetComponent<InputField>().text = ScoreFileName;
+    }
 
     public void GetInputPlayerName(string name)
     {
-        PlayerName = name;
-        Debug.Log(PlayerName);
+        if (name.Equals(""))
+        {
+            PlayerName = "Unknown";
+        }
+        else
+            PlayerName = name;
+
+       Debug.Log(PlayerName);
     }
 
     public void GetInputScoreFileName(string fileName)
     {
-        ScoreFileName = fileName;
+        if (fileName.Length == 0)
+            ScoreFileName = "Scores";
+        else
+            ScoreFileName = fileName;
+
         Debug.Log(ScoreFileName);
     }
 

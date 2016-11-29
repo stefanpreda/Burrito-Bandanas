@@ -38,11 +38,7 @@ public class ScoreController : MonoBehaviour {
     //TODO: Get player name as well
     public void saveScore(string filename)
     {
-        string playerName;
-        if (PlayerNameAndScoreFile.GetPlayerName() == "")
-            playerName = "Unknown";
-        else
-            playerName = PlayerNameAndScoreFile.GetPlayerName();
+        string playerName = PlayerNameAndScoreFile.GetPlayerName();
 
         string s =  playerName + " " + current_score;
         if (!File.Exists(filename))
