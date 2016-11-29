@@ -15,8 +15,6 @@ public class ButtonsListener : MonoBehaviour {
         SceneManager.LoadScene("GameScene");
     }
 
-
-    //TODO: We don't have menu yet
     public void ReturnToMenuButtonPressed()
     {
         Debug.Log("Return pressed");
@@ -32,5 +30,6 @@ public class ButtonsListener : MonoBehaviour {
     public void SettingsButtonPressed()
     {
         Debug.Log("Settings pressed");
+        SceneManager.LoadScene("SettingsScene");
     }
 }

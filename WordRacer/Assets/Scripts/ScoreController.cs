@@ -8,10 +8,11 @@ public class ScoreController : MonoBehaviour {
     public int score_delta = 10;
     public int score_penalty = 10;
     int current_score = 0;
-
+    
 	// Use this for initialization
 	void Start()
     {
+        Debug.Log("PlayerName: " + PlayerNameAndScoreFile.GetPlayerName() + "FileName :" + PlayerNameAndScoreFile.GetScoreFileName());
         current_score = starting_score;
 	}
 	
@@ -37,7 +38,13 @@ public class ScoreController : MonoBehaviour {
     //TODO: Get player name as well
     public void saveScore(string filename)
     {
-        string s = "Player " + current_score;
+        string playerName;
+        if (PlayerNameAndScoreFile.GetPlayerName() == "")
+            playerName = "Unknown";
+        else
+            playerName = PlayerNameAndScoreFile.GetPlayerName();
+
+        string s =  playerName + " " + current_score;
         if (!File.Exists(filename))
         {
             // Create a file to write to.
