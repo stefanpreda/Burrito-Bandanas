@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-class TranslateObject
+class AnimateObject
 {
     private GameObject obj;
     private Vector3 starting_position;
@@ -11,7 +11,7 @@ class TranslateObject
     private float startTime;
     private int direction = 0;
 
-    public TranslateObject(GameObject obj, Vector3 starting_position, Vector3 ending_position)
+    public AnimateObject(GameObject obj, Vector3 starting_position, Vector3 ending_position)
     {
         this.obj = obj;
         this.starting_position = starting_position;
@@ -92,8 +92,9 @@ public class WordBuilder : MonoBehaviour {
     public int sortingOrder = 0;
 
     private bool translate_animations_activated = false;
-    private List<TranslateObject> translate_objects = null;
-
+    private bool scale_animations_activated = false;
+    private List<AnimateObject> translate_objects = null;
+    private List<AnimateObject> scale_objects = null;
     private string[] files = { "easy words", "hard words", "master words" };
     public Camera camera = null;
 
@@ -108,31 +109,62 @@ public class WordBuilder : MonoBehaviour {
         {
             if (translate_objects == null)
                 return;
-            foreach (TranslateObject obj in translate_objects)
+            foreach (AnimateObject obj in translate_objects)
             {
                 float distCovered = (Time.time - obj.getStartTime()) * obj.getSpeed();
                 float fracJourney = distCovered / Vector3.Distance(obj.getStartingPosition(), obj.getEndingPosition());
-
                 if (obj.getDirection() == 0)
                 {
                     obj.getObject().transform.position = Vector3.Lerp(obj.getStartingPosition(), obj.getEndingPosition(), fracJourney);
-                    if (obj.getObject().transform.position.y == obj.getEndingPosition().y)
+                    if (Mathf.Abs(Mathf.Abs(obj.getObject().transform.position.y) - Mathf.Abs(obj.getEndingPosition().y)) < 0.001)
                     {
                         obj.setDirection(1);
                         obj.setStartTime(Time.time);
                     }
-                }
-
-                else
-                {
+               }
+               else
+               {
                     obj.getObject().transform.position = Vector3.Lerp(obj.getEndingPosition(), obj.getStartingPosition(), fracJourney);
-                    if (obj.getObject().transform.position.y == obj.getStartingPosition().y)
+                    if (Mathf.Abs(Mathf.Abs(obj.getObject().transform.position.y) - Mathf.Abs(obj.getStartingPosition().y)) < 0.001)
                     {
                         obj.setDirection(0);
                         obj.setStartTime(Time.time);
                     }
 
                 }
+            }
+        }
+
+        if (scale_animations_activated)
+        {
+            if (scale_objects == null)
+                return;
+            foreach (AnimateObject obj in scale_objects)
+            {
+                float distCovered = (Time.time - obj.getStartTime()) * obj.getSpeed();
+                float fracJourney = distCovered / Vector3.Distance(obj.getStartingPosition(), obj.getEndingPosition());
+
+                if (obj.getDirection() == 0)
+                {
+                    Vector3 res = Vector3.Lerp(obj.getStartingPosition(), obj.getEndingPosition(), fracJourney);
+                    obj.getObject().GetComponent<TextMesh>().fontSize = Screen.width / (int)res.x;
+                    if (obj.getObject().GetComponent<TextMesh>().fontSize - (int)(Screen.width / obj.getEndingPosition().x) == 0)
+                    {
+                        obj.setDirection(1);
+                        obj.setStartTime(Time.time);
+                    }
+                }
+                else
+                {
+                    Vector3 res = Vector3.Lerp(obj.getEndingPosition(), obj.getStartingPosition(), fracJourney);
+                    obj.getObject().GetComponent<TextMesh>().fontSize = Screen.width / (int)res.x;
+                    if (obj.getObject().GetComponent<TextMesh>().fontSize - (int)(Screen.width / obj.getStartingPosition().x) == 0)
+                    {
+                        obj.setDirection(0);
+                        obj.setStartTime(Time.time);
+                    }
+                }
+
             }
         }
     }
@@ -167,10 +199,16 @@ public class WordBuilder : MonoBehaviour {
         for (int i = 0; i < 3 * new_word.Length / 4; i++)
             selected_indices.Add(Random.Range(0, new_word.Length));
 
+        if (round > 4)
+        {
+            translate_objects = new List<AnimateObject>();
+            translate_animations_activated = true;
+        }
+
         if (round > 3)
         {
-            translate_objects = new List<TranslateObject>();
-            translate_animations_activated = true;
+            scale_objects = new List<AnimateObject>();
+            scale_animations_activated = true;
         }
 
         float spacing = 0;
@@ -265,11 +303,25 @@ public class WordBuilder : MonoBehaviour {
                 ending_position.z = 0;
 
                 //Create a new translate object
-                TranslateObject to = new TranslateObject(obj, starting_position, ending_position);
+                AnimateObject to = new AnimateObject(obj, starting_position, ending_position);
                 to.setStartTime(Time.time);
                 to.setDirection(Random.Range(0, 2));
 
                 translate_objects.Add(to);
+            }
+
+            if (scale_animations_activated)
+            {
+                float DeltaSize = Random.Range(0, 20);
+                Vector3 starting_position = new Vector3(text_size_divisor + DeltaSize, 0, 0);
+                Vector3 ending_position = new Vector3(text_size_divisor - DeltaSize, 0, 0);
+
+                AnimateObject to = new AnimateObject(obj, starting_position, ending_position);
+                to.setStartTime(Time.time);
+                to.setSpeed(5.0f);
+                to.setDirection(Random.Range(0, 2));
+
+                scale_objects.Add(to);
             }
 
             var width = obj.GetComponent<MeshRenderer>().bounds.size.x;
@@ -299,6 +351,10 @@ public class WordBuilder : MonoBehaviour {
         translate_animations_activated = false;
         if (translate_objects != null)
             translate_objects.Clear();
+
+        scale_animations_activated = false;
+        if (scale_objects != null)
+            scale_objects.Clear();
     }
 	
    string getWord(int round)
