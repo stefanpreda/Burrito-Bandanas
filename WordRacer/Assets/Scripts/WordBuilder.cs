@@ -2,6 +2,82 @@
 using System.Collections;
 using System.Collections.Generic;
 
+class TranslateObject
+{
+    private GameObject obj;
+    private Vector3 starting_position;
+    private Vector3 ending_position;
+    private float speed = 1f;
+    private float startTime;
+    private int direction = 0;
+
+    public TranslateObject(GameObject obj, Vector3 starting_position, Vector3 ending_position)
+    {
+        this.obj = obj;
+        this.starting_position = starting_position;
+        this.ending_position = ending_position;
+    }
+
+    public void setStartingPosition(Vector3 starting_position)
+    {
+        this.starting_position = starting_position;
+    }
+
+    public void setEndingPosition(Vector3 ending_position)
+    {
+        this.ending_position = ending_position;
+    }
+
+    public void setObject(GameObject obj)
+    {
+        this.obj = obj;
+    }
+
+    public void setStartTime(float time)
+    {
+        startTime = time;
+    }
+
+    public void setSpeed(float speed)
+    {
+        this.speed = speed;
+    }
+    
+    public void setDirection(int direction)
+    {
+        this.direction = direction;
+    }
+
+    public Vector3 getStartingPosition()
+    {
+        return starting_position;
+    }
+
+    public Vector3 getEndingPosition()
+    {
+        return ending_position;
+    }
+    
+    public GameObject getObject()
+    {
+        return obj;
+    }
+
+    public float getStartTime()
+    {
+        return startTime;
+    }
+
+    public float getSpeed()
+    {
+        return speed;
+    }
+
+    public int getDirection()
+    {
+        return direction;
+    }
+}
 public class WordBuilder : MonoBehaviour {
 
     List<GameObject> currentWord;
@@ -11,14 +87,54 @@ public class WordBuilder : MonoBehaviour {
     public float start_positionY = 0.4f;
     public float word_spacing = 0.005f;
     public int text_size_divisor = 25;
+
     public string sortingLayerName = "Default";
     public int sortingOrder = 0;
+
+    private bool translate_animations_activated = false;
+    private List<TranslateObject> translate_objects = null;
+
     private string[] files = { "easy words", "hard words", "master words" };
     public Camera camera = null;
 
     void Start () {
         currentWord = new List<GameObject>();
-        ChangeWord();   
+        ChangeWord();
+    }
+
+    void Update()
+    {
+        if (translate_animations_activated)
+        {
+            if (translate_objects == null)
+                return;
+            foreach (TranslateObject obj in translate_objects)
+            {
+                float distCovered = (Time.time - obj.getStartTime()) * obj.getSpeed();
+                float fracJourney = distCovered / Vector3.Distance(obj.getStartingPosition(), obj.getEndingPosition());
+
+                if (obj.getDirection() == 0)
+                {
+                    obj.getObject().transform.position = Vector3.Lerp(obj.getStartingPosition(), obj.getEndingPosition(), fracJourney);
+                    if (obj.getObject().transform.position.y == obj.getEndingPosition().y)
+                    {
+                        obj.setDirection(1);
+                        obj.setStartTime(Time.time);
+                    }
+                }
+
+                else
+                {
+                    obj.getObject().transform.position = Vector3.Lerp(obj.getEndingPosition(), obj.getStartingPosition(), fracJourney);
+                    if (obj.getObject().transform.position.y == obj.getStartingPosition().y)
+                    {
+                        obj.setDirection(0);
+                        obj.setStartTime(Time.time);
+                    }
+
+                }
+            }
+        }
     }
 
     private string Load(string fileContent) {
@@ -50,7 +166,13 @@ public class WordBuilder : MonoBehaviour {
         //Select some random indices
         for (int i = 0; i < 3 * new_word.Length / 4; i++)
             selected_indices.Add(Random.Range(0, new_word.Length));
- 
+
+        if (round > 3)
+        {
+            translate_objects = new List<TranslateObject>();
+            translate_animations_activated = true;
+        }
+
         float spacing = 0;
         int index = 0;
         foreach (char c in new_word)
@@ -114,7 +236,8 @@ public class WordBuilder : MonoBehaviour {
             pos.z = 0.0f;
             obj.transform.position = pos;
 
-            if (round > 2)
+            //Apply tranlations on Y axis
+            if (round == 2)
             {
                 if (selected_indices.Contains(index))
                 {
@@ -123,6 +246,30 @@ public class WordBuilder : MonoBehaviour {
                     position.z = 0.0f;
                     obj.transform.position = position;
                 }
+            }
+
+            //Apply translation animations
+            if (translate_animations_activated)
+            {
+                //Get the distance of the animation
+                float DeltaDistance_viewport = Random.Range(-0.05f, 0.05f);
+                float DeltaDistance_world = camera.ViewportToWorldPoint(new Vector3(0, DeltaDistance_viewport, 0)).y -
+                    camera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y;
+
+                //Compute starting and ending positions
+                Vector3 starting_position = obj.transform.position;
+                starting_position.y -= DeltaDistance_world;
+                starting_position.z = 0;
+                Vector3 ending_position = obj.transform.position;
+                ending_position.y += DeltaDistance_world;
+                ending_position.z = 0;
+
+                //Create a new translate object
+                TranslateObject to = new TranslateObject(obj, starting_position, ending_position);
+                to.setStartTime(Time.time);
+                to.setDirection(Random.Range(0, 2));
+
+                translate_objects.Add(to);
             }
 
             var width = obj.GetComponent<MeshRenderer>().bounds.size.x;
@@ -148,6 +295,10 @@ public class WordBuilder : MonoBehaviour {
         foreach (GameObject o in currentWord)
             Destroy(o);
         currentWord.Clear();
+
+        translate_animations_activated = false;
+        if (translate_objects != null)
+            translate_objects.Clear();
     }
 	
    string getWord(int round)
