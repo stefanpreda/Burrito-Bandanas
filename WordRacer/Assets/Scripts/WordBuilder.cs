@@ -199,13 +199,13 @@ public class WordBuilder : MonoBehaviour {
         for (int i = 0; i < 3 * new_word.Length / 4; i++)
             selected_indices.Add(Random.Range(0, new_word.Length));
 
-        if (round > 4)
+        if (round > 3)
         {
             translate_objects = new List<AnimateObject>();
             translate_animations_activated = true;
         }
 
-        if (round > 3)
+        if (round > 2)
         {
             scale_objects = new List<AnimateObject>();
             scale_animations_activated = true;
@@ -219,6 +219,8 @@ public class WordBuilder : MonoBehaviour {
             obj.AddComponent<TextMesh>();
             obj.GetComponent<TextMesh>().text = c.ToString();
             obj.GetComponent<TextMesh>().characterSize = 0.1f;
+            obj.GetComponent<TextMesh>().alignment = TextAlignment.Center;
+            obj.GetComponent<TextMesh>().anchor = TextAnchor.MiddleCenter;
 
             //Draw this on top of other components
             obj.GetComponent<MeshRenderer>().sortingLayerName = sortingLayerName;
@@ -239,40 +241,37 @@ public class WordBuilder : MonoBehaviour {
                 obj.GetComponent<TextMesh>().fontSize = Screen.width / Random.Range(text_size_divisor - 10, text_size_divisor + 10);
             }
 
-            //Apply flips
-            //TODO: This works but the text is very hard to read
-            /*if (round == 0)
-            {
-                if (selected_indices.Contains(index))
-                {
-                    obj.transform.localScale = new Vector3((-1) * obj.transform.localScale.x, obj.transform.localScale.y, obj.transform.localScale.z);
-                }
-            }*/
-
-            //Apply rotations with fixed angle
-            //TODO Not sure if this is correct, looks horrible
-            /*if (round == 0)
-            {
-                if (selected_indices.Contains(index))
-                {
-                    int rotation_angle_index = Random.Range(0, 8);
-                    int angle = 0;
-                    if (rotation_angle_index < 5)
-                        angle = rotation_angle_index * 90;
-                    else
-                        angle = (rotation_angle_index - 4) * (-90);
-                    Quaternion rotation = Quaternion.identity;
-                    rotation.eulerAngles = new Vector3(0, 0, angle);
-                    //obj.transform.Rotate(Vector3.forward * angle);
-                    //obj.transform.rotation = rotation;
-                    obj.transform.RotateAround(obj.transform.position, new Vector3(0, 0, 1), angle);
-                }
-
-            }*/
-
             Vector3 pos = camera.ViewportToWorldPoint(new Vector3(start_positionX + spacing, start_positionY, 0.0f));
             pos.z = 0.0f;
             obj.transform.position = pos;
+
+            //Apply rotations with fixed angle
+            if (round == 5)
+            {
+                if (selected_indices.Contains(index))
+                {
+                    int rotation_angle_index = Random.Range(0, 4);
+                    int angle = 0;
+                    angle = rotation_angle_index * 90;
+                    Quaternion rotation = Quaternion.identity;
+                    rotation.eulerAngles = new Vector3(0, 0, obj.transform.rotation.z + angle);
+                    obj.transform.rotation = rotation;
+                }
+
+            }
+
+            //Apply rotations with random angle
+            if (round == 6)
+            {
+                if (selected_indices.Contains(index))
+                {
+                    int angle = Random.Range(0, 360);
+                    Quaternion rotation = Quaternion.identity;
+                    rotation.eulerAngles = new Vector3(0, 0, obj.transform.rotation.z + angle);
+                    obj.transform.rotation = rotation;
+                }
+
+            }
 
             //Apply tranlations on Y axis
             if (round == 2)
