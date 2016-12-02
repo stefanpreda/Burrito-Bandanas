@@ -45,7 +45,6 @@ public class RoundsController : MonoBehaviour {
         float seconds = getSecondsForRound(current_round);
         GameObject.FindGameObjectWithTag("TimerController").GetComponent<TimerController>().resetTimer(seconds);
         GameObject.FindGameObjectWithTag("TimerController").GetComponent<TimerController>().startTimer();
-
     }
 
     public void winCurrentRound()
