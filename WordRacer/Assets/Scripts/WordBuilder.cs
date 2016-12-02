@@ -93,8 +93,11 @@ public class WordBuilder : MonoBehaviour {
 
     private bool translate_animations_activated = false;
     private bool scale_animations_activated = false;
+    private bool rotate_animations_activated = false;
     private List<AnimateObject> translate_objects = null;
     private List<AnimateObject> scale_objects = null;
+    private List<AnimateObject> rotate_objects = null;
+
     private string[] files = { "easy words", "hard words", "master words" };
     public Camera camera = null;
 
@@ -121,9 +124,9 @@ public class WordBuilder : MonoBehaviour {
                         obj.setDirection(1);
                         obj.setStartTime(Time.time);
                     }
-               }
-               else
-               {
+                }
+                else
+                {
                     obj.getObject().transform.position = Vector3.Lerp(obj.getEndingPosition(), obj.getStartingPosition(), fracJourney);
                     if (Mathf.Abs(Mathf.Abs(obj.getObject().transform.position.y) - Mathf.Abs(obj.getStartingPosition().y)) < 0.001)
                     {
@@ -167,8 +170,44 @@ public class WordBuilder : MonoBehaviour {
 
             }
         }
-    }
 
+        if (rotate_animations_activated)
+        {
+            if (rotate_objects == null)
+                return;
+            foreach (AnimateObject obj in rotate_objects)
+            {
+                float distCovered = (Time.time - obj.getStartTime()) * obj.getSpeed();
+                float fracJourney = distCovered / Vector3.Distance(obj.getStartingPosition(), obj.getEndingPosition());
+                if (obj.getDirection() == 0)
+                {
+                    Vector3 res = Vector3.Lerp(obj.getStartingPosition(), obj.getEndingPosition(), fracJourney);
+                    Quaternion rotation = Quaternion.identity;
+                    rotation.eulerAngles = new Vector3(0, 0, res.x);
+                    obj.getObject().transform.rotation = rotation;
+
+                    if ((obj.getObject().transform.rotation.z - 360) < 0.001)
+                    {
+                        obj.getObject().transform.rotation = Quaternion.identity;
+                        obj.setStartTime(Time.time);
+                    }
+                }
+                else
+                {
+                    Vector3 res = Vector3.Lerp(obj.getEndingPosition(), obj.getStartingPosition(), fracJourney);
+                    Quaternion rotation = Quaternion.identity;
+                    rotation.eulerAngles = new Vector3(0, 0, res.x);
+                    obj.getObject().transform.rotation = rotation;
+
+                    if (obj.getObject().transform.rotation.z < 0.001)
+                    {
+                        obj.getObject().transform.rotation = Quaternion.identity;
+                        obj.setStartTime(Time.time);
+                    }
+                }
+            }
+        }
+    }
     private string Load(string fileContent) {
         string result = "";
         string[] words = fileContent.Split('\n');
@@ -211,6 +250,12 @@ public class WordBuilder : MonoBehaviour {
             scale_animations_activated = true;
         }
 
+        if (round > 6)
+        {
+            rotate_objects = new List<AnimateObject>();
+            rotate_animations_activated = true;
+        }
+
         float spacing = 0;
         int index = 0;
         foreach (char c in new_word)
@@ -245,6 +290,18 @@ public class WordBuilder : MonoBehaviour {
             pos.z = 0.0f;
             obj.transform.position = pos;
 
+            //Apply tranlations on Y axis
+            if (round == 2)
+            {
+                if (selected_indices.Contains(index))
+                {
+                    float deltaY = Random.Range(-0.05f, 0.05f);
+                    var position = camera.ViewportToWorldPoint(new Vector3(start_positionX + spacing, start_positionY + deltaY, 0.0f));
+                    position.z = 0.0f;
+                    obj.transform.position = position;
+                }
+            }
+
             //Apply rotations with fixed angle
             if (round == 5)
             {
@@ -273,18 +330,6 @@ public class WordBuilder : MonoBehaviour {
 
             }
 
-            //Apply tranlations on Y axis
-            if (round == 2)
-            {
-                if (selected_indices.Contains(index))
-                {
-                    float deltaY = Random.Range(-0.05f, 0.05f);
-                    var position = camera.ViewportToWorldPoint(new Vector3(start_positionX + spacing, start_positionY + deltaY, 0.0f));
-                    position.z = 0.0f;
-                    obj.transform.position = position;
-                }
-            }
-
             //Apply translation animations
             if (translate_animations_activated)
             {
@@ -309,18 +354,38 @@ public class WordBuilder : MonoBehaviour {
                 translate_objects.Add(to);
             }
 
+            //Apply scale animations
             if (scale_animations_activated)
             {
+                //Get the size of the scale
                 float DeltaSize = Random.Range(0, 20);
                 Vector3 starting_position = new Vector3(text_size_divisor + DeltaSize, 0, 0);
                 Vector3 ending_position = new Vector3(text_size_divisor - DeltaSize, 0, 0);
 
+                //Create a new Scale object
                 AnimateObject to = new AnimateObject(obj, starting_position, ending_position);
                 to.setStartTime(Time.time);
                 to.setSpeed(5.0f);
                 to.setDirection(Random.Range(0, 2));
 
                 scale_objects.Add(to);
+            }
+
+            //Apply rotation animations
+            if (rotate_animations_activated)
+            {
+                //Get the starting and ending angles
+                Vector3 starting_position = new Vector3(0, 0, 0);
+                Vector3 ending_position = new Vector3(360, 0, 0);
+                float speed = Random.Range(50, 90);
+
+                //Create a new Rotation object
+                AnimateObject to = new AnimateObject(obj, starting_position, ending_position);
+                to.setStartTime(Time.time);
+                to.setSpeed(speed);
+                to.setDirection(Random.Range(0, 2));
+
+                rotate_objects.Add(to);
             }
 
             var width = obj.GetComponent<MeshRenderer>().bounds.size.x;
@@ -354,6 +419,10 @@ public class WordBuilder : MonoBehaviour {
         scale_animations_activated = false;
         if (scale_objects != null)
             scale_objects.Clear();
+
+        rotate_animations_activated = false;
+        if (rotate_objects != null)
+            rotate_objects.Clear();
     }
 	
    string getWord(int round)
