@@ -27,6 +27,7 @@ public class TextController : MonoBehaviour {
     {
         InputField field = GameObject.FindGameObjectWithTag("Input").GetComponent<InputField>();
         field.text = "";
+        field.ActivateInputField();
     }
 
     public void triggerNextRound()
