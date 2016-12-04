@@ -83,7 +83,7 @@ public class RoundsController : MonoBehaviour {
 
             //Save score
             string filename = PlayerNameAndScoreFile.GetScoreFileName();
-            GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreController>().saveScore(filename + ".txt");
+            GameObject.FindGameObjectWithTag("Score").GetComponent<ScoreController>().saveScore(filename);
 
             SceneManager.LoadScene("EndScene");
         }

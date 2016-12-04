@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class PlayerNameAndScoreFile : MonoBehaviour {
     static protected string PlayerName = "Unknown";
-    static protected string ScoreFileName = "Scores";
+    static protected string ScoreFileName = "Scores.txt";
 
     void Start()
     {
@@ -27,7 +27,7 @@ public class PlayerNameAndScoreFile : MonoBehaviour {
     public void GetInputScoreFileName(string fileName)
     {
         if (fileName.Length == 0)
-            ScoreFileName = "Scores";
+            ScoreFileName = "Scores.txt";
         else
             ScoreFileName = fileName;
 

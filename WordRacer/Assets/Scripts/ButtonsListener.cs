@@ -11,25 +11,26 @@ public class ButtonsListener : MonoBehaviour {
 
     public void RestartButtonPressed()
     {
-        Debug.Log("Restart pressed");
         SceneManager.LoadScene("GameScene");
     }
 
     public void ReturnToMenuButtonPressed()
     {
-        Debug.Log("Return pressed");
         SceneManager.LoadScene("StartScene");
     }
 
     public void NewGrameButtonPressed()
     {
-        Debug.Log("New Game pressed");
         SceneManager.LoadScene("GameScene");
     }
 
     public void SettingsButtonPressed()
     {
-        Debug.Log("Settings pressed");
         SceneManager.LoadScene("SettingsScene");
+    }
+
+    public void ScoreboardButtonPressed()
+    {
+        SceneManager.LoadScene("ScoreboardScene");
     }
 }
