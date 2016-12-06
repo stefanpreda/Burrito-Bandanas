@@ -214,10 +214,10 @@ public class WordBuilder : MonoBehaviour {
         int number;
         for (int i = 0; i < 2; i++) {
 
-            number = UnityEngine.Random.Range(1, 800);
+            number = UnityEngine.Random.Range(1, 700);
             result += words[number].Substring(0,words[number].Length - 1) + " ";
         }
-        number = UnityEngine.Random.Range(1, 800);
+        number = UnityEngine.Random.Range(1, 700);
         result += words[number].Substring(0, words[number].Length - 1);
         return result;
     }
