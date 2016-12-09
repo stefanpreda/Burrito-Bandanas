@@ -86,7 +86,8 @@ public class WordBuilder : MonoBehaviour {
     public float start_positionX = 0.5f;
     public float start_positionY = 0.4f;
     public float word_spacing = 0.005f;
-    public int text_size_divisor = 25;
+    public int starting_text_size_divisor = 25;
+    private int text_size_divisor;
 
     public string sortingLayerName = "Default";
     public int sortingOrder = 0;
@@ -103,6 +104,7 @@ public class WordBuilder : MonoBehaviour {
 
     void Start () {
         currentWord = new List<GameObject>();
+        text_size_divisor = starting_text_size_divisor;
         ChangeWord();
     }
 
@@ -214,15 +216,14 @@ public class WordBuilder : MonoBehaviour {
         int number;
         for (int i = 0; i < 2; i++) {
 
-            number = UnityEngine.Random.Range(1, 700);
+            number = UnityEngine.Random.Range(1, 800);
             result += words[number].Substring(0,words[number].Length - 1) + " ";
         }
-        number = UnityEngine.Random.Range(1, 700);
+        number = UnityEngine.Random.Range(1, 800);
         result += words[number].Substring(0, words[number].Length - 1);
         return result;
     }
 
-    //TODO: Change text fonts and stuff based on current round
     public void ChangeWord()
     {
         ClearWord();
@@ -231,8 +232,10 @@ public class WordBuilder : MonoBehaviour {
         string new_word = getWord(round);
         currentWord_string = new_word;
 
+        text_size_divisor = starting_text_size_divisor + (new_word.Length / 5);
+
         //List of indices which will have certain transformations applied on
-        List<int> selected_indices = new List<int>();
+        List <int> selected_indices = new List<int>();
 
         //Select some random indices
         for (int i = 0; i < 3 * new_word.Length / 4; i++)
@@ -272,7 +275,7 @@ public class WordBuilder : MonoBehaviour {
             obj.GetComponent<MeshRenderer>().sortingOrder = sortingOrder;
 
             //Scale to screen size
-            obj.GetComponent<TextMesh>().fontSize = Screen.width / text_size_divisor;
+            obj.GetComponent<TextMesh>().fontSize = Mathf.Min(Screen.width, Screen.height) / text_size_divisor;
 
             //Apply color changes
             if (round > 0)
@@ -423,17 +426,21 @@ public class WordBuilder : MonoBehaviour {
         rotate_animations_activated = false;
         if (rotate_objects != null)
             rotate_objects.Clear();
+
+        text_size_divisor = starting_text_size_divisor;
     }
-	
+
+    //FIXME: Last word file has too many words on one line, words are too long
+    //       file length is less < 800 (indexOutOfBounds in load).
    string getWord(int round)
     { 
         string wordFile;
         if (round < 10)
             wordFile = files[0];
-        else if (round < 20)
+        /*else if (round < 20)
             wordFile = files[1];
-        else
-            wordFile = files[2];
+        else*/
+            wordFile = files[1];
         TextAsset txt = (TextAsset)Resources.Load(wordFile, typeof(TextAsset));
         string content = txt.text;
         return Load(content);
