@@ -246,7 +246,6 @@ doctor
 editor
 engineer
 farmer
-fire fighter
 fisherman
 judge
 lawyer
@@ -277,7 +276,8 @@ watchmaker
 address
 age
 apply
-area code
+area
+code
 birthday
 certification
 children
@@ -285,61 +285,70 @@ citizenship
 city
 college
 country
-criminal record
+criminal
+record
 date
-date of birth
 dependents
 diploma
 divorced
 education
-educational background
-elementary school
+educational
+background
+elementary
+school
 employee
 employer
 experience
-family name
-felony record
+family
+name
+felony
+record
 female
 fired
-first name
 gender
-graduate school
+graduate
+school
 handicap
 hearing
 height
-high school
-husband's name
-junior college
-junior high school
-last name
+high
+school
+husband
+junior
+college
 male
-marital status
+marital
+status
 married
-middle name
-name
-next of kin
+middle
 notify
 occupation
-phone number
-physical examination
+phone
+number
+physical
+examination
 position
-present address
-previous experience
+present
+address
+previous
+experience
 quit
-reason for leaving
+reason
+leaving
 relatives
 salary
 separated
 single
 skills
-social security number
+social
+security
+number
 state
 street
-telephone number
+telephone
 vision
 weight
-wife's name
-zip code
+zipcode
 accept
 add
 admit
@@ -434,47 +443,47 @@ split
 structure
 succeed
 suggest
-adjustable wrench
-ball peen hammer
-bench saw
-box end wrench
+adjustable
+wrench
 brace
 C-clamp
-circular saw
-drill press
-electric drill
+circular
+electric
+drill
 hacksaw
 hammer
-hand drill
 handsaw
-locking pliers
+locking
+pliers
 mallet
-open end wrench
 plane
 pliers
-rib joint pliers
 router
 screwdriver
 vise
-baggage claim check
-boarding pass
-boarding time
-body check
-check in
+baggage
+claim
+check
+boarding
+pass
+declaration
 customs
-customs declaration
-customs officer
-departure lounge
-departure time
-immigration counter
+officer
+departure
+lounge
+immigration
+counter
 passport
-personal effects
-security check
-time difference
-time zones
+personal
+effects
+security
+check
+difference
+zones
 visa
 capricorn
-abominable snowman
+abominable
+snowman
 android
 dragon
 Martian
@@ -500,46 +509,27 @@ tugboat
 wharf
 C-clamp
 chisel
-electric drill
 file
-finishing sander
 hacksaw
 jigsaw
-large level
-large screwdriver
-metal snips
-paint brush
-pipe clamp
-pipe wrench
 plane
-portable power saw
-propane torch
-putty knife
 scraper
-sharpening stone
-side-cutting pliers
-small wrecking bar
-soldering gun
+sharpening
+side-cutting
+soldering
 stapler
-wire brush
-wire stripper
+wirestripper
 backstroke
 breaststroke
 butterfly
 crawl
-deep end
 diving
-diving board
-dog paddle
 lake
-life guard
 ocean
 river
-shallow end
 sidestroke
-swimming lane
-swimming pool
-synchronized swimming
+synchronized
+swimming
 turn
 water
 blizzard
@@ -554,41 +544,39 @@ freeze
 frost
 hat
 ice
-Merry Christmas
+Merry
+Christmas
 mittens
 scarf
 season
 shovel
 skates
 sled
-sleigh bells
 snowflake
 snowman
 snowstorm
 winter
 butane
-carbon dioxide
-carbon monoxide
+carbon
+dioxide
+monoxide
 freon
 helium
 hydrogen
 methane
 neon
-nitric oxide
+nitric
 nitrogen
 oxygen
 propane
 baler
-combine harvester
+harvester
 cultivator
-disk harrow
-fertilizer distributor
+fertilizer
+distributor
 harrow
-manure spreader
-ribbing plow
-rotary hoe
-seed drill
-subsoil plow
+manure
+spreader
 tractor
 air
 barometer
@@ -605,7 +593,6 @@ degree
 dew
 drizzle
 dry
-dry season
 Fahrenheit
 flood
 fog
@@ -628,7 +615,6 @@ rain
 rainstorm
 rainbow
 rainy
-rainy season
 sky
 sleet
 snow
@@ -690,9 +676,9 @@ senseless
 sightless
 tasteless
 useless
-aluminum ladder
-extension ladder
-foldaway ladder
+aluminum
+extension
+foldaway
 barge
 dredger
 dugout
@@ -719,7 +705,6 @@ hovercraft
 hydrofoil
 kayak
 motorboat
-passenger ship
 raft
 rowboat
 sailboat
@@ -730,3 +715,86 @@ submarine
 surfboard
 swimming
 yacht
+physical
+examination
+position
+present
+address
+previous
+experience
+physical
+examination
+position
+present
+address
+previous
+experience
+physical
+examination
+position
+present
+address
+previous
+experience
+physical
+examination
+position
+present
+address
+previous
+experience
+physical
+examination
+position
+present
+address
+previous
+experience
+physical
+examination
+position
+present
+address
+previous
+experience
+physical
+examination
+position
+present
+address
+previous
+experience
+physical
+examination
+position
+present
+address
+previous
+experience
+physical
+examination
+position
+present
+address
+previous
+experience
+physical
+examination
+position
+present
+address
+previous
+experience
+physical
+examination
+position
+present
+address
+previous
+experience
+physical
+examination
+position
+present
+address
+previous

@@ -210,15 +210,13 @@ public class WordBuilder : MonoBehaviour {
             }
         }
     }
+    // provide random strings from textfiles
     private string Load(string fileContent) {
         string result = "";
         string[] words = fileContent.Split('\n');
         int number;
-        for (int i = 0; i < 2; i++) {
-
-            number = UnityEngine.Random.Range(1, 800);
-            result += words[number].Substring(0,words[number].Length - 1) + " ";
-        }
+        number = UnityEngine.Random.Range(1, 800);
+        result += words[number].Substring(0,words[number].Length - 1) + " ";
         number = UnityEngine.Random.Range(1, 800);
         result += words[number].Substring(0, words[number].Length - 1);
         return result;
@@ -429,18 +427,16 @@ public class WordBuilder : MonoBehaviour {
 
         text_size_divisor = starting_text_size_divisor;
     }
-
-    //FIXME: Last word file has too many words on one line, words are too long
-    //       file length is less < 800 (indexOutOfBounds in load).
+    // set file for words in correlation with round number
    string getWord(int round)
     { 
         string wordFile;
-        if (round < 10)
+        if (round < 3)
             wordFile = files[0];
-        /*else if (round < 20)
+        else if (round < 6 && round > 2)
             wordFile = files[1];
-        else*/
-            wordFile = files[1];
+        else
+            wordFile = files[2];
         TextAsset txt = (TextAsset)Resources.Load(wordFile, typeof(TextAsset));
         string content = txt.text;
         return Load(content);
